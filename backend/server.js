@@ -4,6 +4,7 @@ import authRouter from "./routes/auth.route.js";
 import dotenv from "dotenv";
 import { connectToDb } from "./lib/mongodb.js";
 import cookieParser from "cookie-parser";
+import messageRouter from "./routes/message.route.js";
 
 // app config
 const app = express();
@@ -27,6 +28,9 @@ app.get("/", (req, res) => {
 
 // auth apis end point
 app.use("/api/auth", authRouter);
+
+// message api end point
+app.use("/api/message", messageRouter)
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
