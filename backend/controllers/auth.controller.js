@@ -145,7 +145,7 @@ export const updateUserProfile = async (req, res) => {
     const { profilePic } = req.body;
 
     // accessing userId from middleware
-    const userId = req.user_id;
+    const userId = req.user && req.user._id;
 
     if (!profilePic) {
       return res.status(400).json({
@@ -181,6 +181,8 @@ export const updateUserProfile = async (req, res) => {
 // api to return back user details
 export const checkAuth = (req, res) => {
   try {
+    // accessing userId from middleware
+    const userId = req.user && req.user._id;
     res.status(200).json(req.user);
   } catch (error) {
     console.log(error);
