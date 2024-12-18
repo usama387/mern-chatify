@@ -9,7 +9,9 @@ export const useAuthStore = create((set) => ({
   // this state is used to control the loading state of the signup api
   isSigningUp: false,
 
+  // this state is used to control the loading state of the login api
   isLoggingIn: false,
+
   isUpdatingProfile: false,
 
   isCheckingAuth: true,
@@ -52,6 +54,21 @@ export const useAuthStore = create((set) => ({
     } catch (error) {
       console.log("Error Response:", error.response.data);
       toast.error(error.response.data.message);
+    }
+  },
+
+  // function to call login api using fromData as parameter from login page 
+  login: async (formData) => {
+    set({ isLoggingIn: true });
+    try {
+      const response = await axiosInstance.post("/api/auth/login", formData);
+      set({ authUser: response.data });
+      toast.success("User logged in successfully!");
+    } catch (error) {
+      console.log("Error Response:", error.response.data);
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isLoggingIn: false });
     }
   },
 }));
