@@ -11,7 +11,6 @@ import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
-  
   const { authUser, checkUserAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
