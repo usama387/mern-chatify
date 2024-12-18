@@ -12,6 +12,7 @@ export const useAuthStore = create((set) => ({
   // this state is used to control the loading state of the login api
   isLoggingIn: false,
 
+  // this state is used to control the loading state of the update profile api
   isUpdatingProfile: false,
 
   isCheckingAuth: true,
@@ -57,7 +58,7 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  // function to call login api using fromData as parameter from login page 
+  // function to call login api using fromData as parameter from login page
   login: async (formData) => {
     set({ isLoggingIn: true });
     try {
@@ -69,6 +70,23 @@ export const useAuthStore = create((set) => ({
       toast.error(error.response.data.message);
     } finally {
       set({ isLoggingIn: false });
+    }
+  },
+
+  // function to update user prfile with imageData parameter comes from profilePage
+  updateProfile: async (imageData) => {
+    set({ isUpdatingProfile: true });
+    try {
+      const response = await axiosInstance.put(
+        "/api/auth/updateProfile",
+        imageData
+      );
+      set({ authUser: response.data }); // update authUser state with updated user data
+      toast.success("Profile updated successfully in db!");
+    } catch (error) {
+      console.log("Error Response:", error.response.data);
+    } finally {
+      set({ isUpdatingProfile: false });
     }
   },
 }));
