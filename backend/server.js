@@ -16,7 +16,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // cors middleware to enable cross-origin resource sharing (CORS) from all ips
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", 
+    credentials: true, // Allow cookies to be sent
+  })
+);
 
 // dotenv config
 dotenv.config();
@@ -30,7 +35,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 
 // message api end point
-app.use("/api/message", messageRouter)
+app.use("/api/message", messageRouter);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
