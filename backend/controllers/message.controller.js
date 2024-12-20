@@ -6,7 +6,7 @@ import User from "../models/user.model.js";
 export const getUsersForSidebar = async (req, res) => {
   try {
     // Get the user id from the request
-    const loggedInUser = req.user._id;
+    const loggedInUser = req.user && req.user._id;
 
     // Exclude the logged in user from the list of users
     const filteredUsers = await User.find({
