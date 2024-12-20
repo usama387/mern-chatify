@@ -17,6 +17,9 @@ export const useAuthStore = create((set) => ({
 
   isCheckingAuth: true,
 
+  // initial state of online users
+  onlineUsers: [],
+
   // function to call api to check if user is logged in or not if logged in save user authUser state with set
   checkUserAuth: async () => {
     try {
