@@ -31,7 +31,7 @@ export const getMessages = async (req, res) => {
     const { id: userToChatId } = req.params;
 
     // now logged in user id
-    const myId = req.user._id;
+    const myId = req.user && req.user._id;
 
     // the messages with $or fetches the messages where sender is me and receiver is other user and also where receiver is me and sender is other user
     const messages = await Message.find({
@@ -67,7 +67,7 @@ export const sendMessage = async (req, res) => {
     const { id: receiverId } = req.params;
 
     // now logged in user id
-    const senderId = req.user._id;
+    const senderId = req.user && req.user._id;
 
     let imageUrl;
     if (image) {
