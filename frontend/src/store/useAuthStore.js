@@ -73,7 +73,7 @@ export const useAuthStore = create((set) => ({
     }
   },
 
-  // function to update user prfile with imageData parameter comes from profilePage
+  // function to update user profile with imageData parameter comes from profilePage
   updateProfile: async (imageData) => {
     set({ isUpdatingProfile: true });
     try {
